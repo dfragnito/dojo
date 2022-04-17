@@ -139,9 +139,15 @@ if(req.status == 200) {
         var el = document.createElement("div")
         el.className = "border-t py-4"
         el.dataset.todo = todo.id
+		var link = document.createElement("a");
+        link.setAttribute("href", `/.netlify/functions/todo?id=${todo.id}`);
         var name = document.createElement("span")
+		var txt = link.href;
+		var textNode = document.createTextNode(todo.name);
         name.className = todo.completed ? "line-through" : ""
-        name.textContent = todo.name
+        //name.textContent = todo.name
+		link.appendChild(textNode);
+        name.appendChild(link);
         var checkbox = document.createElement("input")
         checkbox.className = "mx-4"
         checkbox.type = "checkbox"
