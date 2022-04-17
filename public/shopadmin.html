@@ -51,8 +51,8 @@
 					
 This is the <a href="https://schemafreesql.com">SchemafreeSQL</a> Shop Admin Netlfy Demo.<br>
 This page calls a Netlify Function(AWS LAMDA) and displays the results.<br>
-Here is a <a href="https://main--dulcet-banoffee-470c71.netlify.app/.netlify/functions/shop">direct link to the function</a> which returns the result of an HTTPS Request(method:POST,body:<a href="payload.json">ShopAdminPayload</a>) to a SFSQL endpoint.<br><br>
-We also have a Shop Admin <a href="https://main--dulcet-banoffee-470c71.netlify.app/.netlify/functions/shopadmin">Netlify function</a> which returns a server side rendered app.     
+Here is a <a href="/.netlify/functions/shop">direct link to the function</a> which returns the result of an HTTPS Request(method:POST,body:<a href="payload.json">ShopAdminPayload</a>) to a SFSQL endpoint.<br><br>
+We also have a Shop Admin <a href="/.netlify/functions/shopadmin">Netlify function</a> which returns a server side rendered app.     
 		</main>
 	</div>
 </section>
@@ -72,7 +72,7 @@ th, td {
 
 var req = new XMLHttpRequest();
 
-req.open('GET', 'https://harmonious-mermaid-c4d794.netlify.app/.netlify/functions/shop', false);
+req.open('GET', '/.netlify/functions/shop', false);
 req.send(null);
 
 if(req.status == 200) {
