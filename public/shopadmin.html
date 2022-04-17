@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+ <title>SchemafreeSQL Demo Shop Admin</title>
+<meta property='og:title' content='SchemafreeSQL Demo Netlify Site'/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="SchemafreeSQL empowers your SQL database">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<link rel="stylesheet" href="https://schemafreesql.com/cssreset-min.css">
+<link rel="stylesheet" href="https://schemafreesql.com/main.css">
+
+<!--  favicon - start -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://schemafreesql.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://schemafreesql.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://schemafreesql.com/favicons/favicon-16x16.png">
+<link rel="mask-icon" href="https://schemafreesql.com/favicons/safari-pinned-tab.svg" color="#2e5696">
+<link rel="shortcut icon" href="https://schemafreesql.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2e5696">
+<meta name="msapplication-config" content="https://schemafreesql.com/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-title" content="SFSQL">
+<!--  favicon - end -->
+<link rel="stylesheet" href="https://schemafreesql.com/grid.css">
+</head>
+<body>
+ <nav>
+	<div class="logo">
+	 <a href="/"><img id="svglogo" src="https://schemafreesql.com/images/logo-schemafreesql.svg" title="SchemafreeSQL" alt="SchemafreeSQL"></a>
+	<a href="/"><img id="svglogoicon" src="https://schemafreesql.com/favicon.ico" title="SchemafreeSQL" alt="SchemafreeSQL"></a>
+	 </div>
+	<div style="display:flex; flex-direction:row">
+		<div class="topMenuLinkGroup">
+												<!--<a class="topPlainAnchor showInHome"  href="createaccount.html">Create Account</a>-->
+		</div>
+		<div class="topCtaGroup">
+			<a class="nav_twitter" href="https://twitter.com/SchemafreeSQL">
+				<svg width="35" height="35" viewBox="0 0 35 35"><path d="M11.895 29.776c11.401 0 17.638-9.447 17.638-17.639 0-.268 0-.535-.018-.8a12.612 12.612 0 0 0 3.092-3.21 12.37 12.37 0 0 1-3.56.976 6.22 6.22 0 0 0 2.725-3.43 12.424 12.424 0 0 1-3.936 1.506 6.205 6.205 0 0 0-10.564 5.653A17.6 17.6 0 0 1 4.496 6.355a6.204 6.204 0 0 0 1.919 8.276 6.153 6.153 0 0 1-2.814-.776v.078a6.201 6.201 0 0 0 4.974 6.077 6.189 6.189 0 0 1-2.8.106 6.206 6.206 0 0 0 5.792 4.305 12.439 12.439 0 0 1-9.174 2.57 17.55 17.55 0 0 0 9.502 2.78" fill-rule="evenodd"></path></svg>
+			</a>
+		
+		</div>
+	</div>
+
+	
+</nav>
+<section id="hero" class="scrollsensor">
+	<div class="sectionWrap">
+		<main>
+			
+				
+					
+This is the <a href="https://schemafreesql.com">SchemafreeSQL</a> Shop Admin Netlfy Demo.<br>
+This page calls a Netlify Function(AWS LAMDA) and displays the results.<br>
+Here is a <a href="https://main--dulcet-banoffee-470c71.netlify.app/.netlify/functions/shop">direct link to the function</a> which returns the result of an HTTPS Request(method:POST,body:<a href="payload.json">ShopAdminPayload</a>) to a SFSQL endpoint.<br><br>
+We also have a Shop Admin <a href="https://main--dulcet-banoffee-470c71.netlify.app/.netlify/functions/shopadmin">Netlify function</a> which returns a server side rendered app.     
+		</main>
+	</div>
+</section>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+}
+</style>
+<pre id="whereToPrint"></pre>
+<div id="examplewrap"></div>
+  <script>
+  
+
+var req = new XMLHttpRequest();
+
+req.open('GET', '/.netlify/functions/shop', false);
+req.send(null);
+
+if(req.status == 200) {
+   var obj = JSON.parse(req.responseText);
+}
+ 
+   // var obj = JSON.parse(req.responseText);
+	 
+	 let sups = obj.filter(supp => supp._q == "supp")[0]["data"];
+	 let prods = obj.filter(prod => prod._q == "prod")[0]["data"]; 
+	 let custs = obj.filter(cust => cust._q == "cust")[0]["data"]; 
+	 let items = obj.filter(order => order._q == "order")[0]["data"]; 
+	 let items1 = items.filter(obj => {
+				return obj.orderid === 1;
+			});
+	 let items2 = items.filter(obj => {
+				return obj.orderid === 2;
+			});
+
+
+let destEle = document.getElementById('examplewrap');
+if (!destEle) {
+	alert('could not find element examplewrap');
+	exit;
+}
+	 
+// Suppliers
+//examplewrap.innerHTML += ("test"); 
+document.write("<table>");
+document.write("<tr><td colspan=" + sups.length + "><b>SUPPLIERS</b></td></tr>");	
+document.write("<tr>"); 
+for (var j = 0; j < sups.length; j++){
+       document.write("<td>");	 
+	 Object.entries(sups[j]).forEach(entry => {
+		  const [key, value] = entry;
+		  //console.log(key, value);
+		  document.write(key + ": " +  value + "<br>");  
+		});
+		   document.write("</td>");	
+	} 
+document.write("</tr></table>"); 	
+
+document.write("<br>"); 
+
+
+//Products
+document.write("<table>"); 
+document.write('<tr><td colspan="' + prods.length + '"><b>PRODUCTS</b></td></tr>');	
+document.write("<tr>"); 
+for (var j = 0; j < prods.length; j++){
+       document.write("<td>");	 
+	 Object.entries(prods[j]).forEach(entry => {
+		  const [key, value] = entry;
+		  if(key== 'image'){ 
+		   document.write('<img src="https://sfsqlblogimages.s3.amazonaws.com/product-images/'+ value +'"/><br>'); 
+			}else{
+			document.write(key + ": " +  value + "<br>");  
+			}
+		});
+		   document.write("</td>");	
+	} 
+document.write("</tr></table>");
+
+	document.write("<br>"); 
+	
+//Customers
+document.write("<table>"); 
+document.write('<tr><td colspan="' + custs.length + '"><b>Customers</b></td></tr>');	
+document.write("<tr>"); 
+for (var j = 0; j < custs.length; j++){
+       document.write("<td>");	 
+	 //Object.entries(custs[j]).forEach(entry => {
+		 // const [key, value] = entry;
+		 // document.write(key + ": " +  value + "<br>");  
+		//});
+		document.write("First Name : " + custs[j]['fname'] + "<br>"); 
+		document.write("Last Name: " + custs[j]['lname'] + "<br>"); 
+		document.write("ID: " + custs[j]['cusid'] + "<br>");
+		document.write("Email: " + custs[j]['email'] + "<br>");	
+      document.write("Address <br>"); 
+      document.write(custs[j]['street'] + "<br>");
+      document.write(custs[j]['city'] + " " + custs[j]['state'] + " " + custs[j]['zip']);	
+		document.write("</td>");	
+	} 
+document.write("</tr></table>");
+	
+	
+//Order	1	
+document.write("<br><br>"); 
+	
+document.write("<table>"); 
+document.write('<tr><td colspan="7"><b>Order 1</b></td></tr>');	
+document.write("<tr>"); 
+document.write('<td colspan="7">Order ID: ' + items1[0]['orderid'] + '<br>Customer: ' + items1[0]['fname'] + ' ' + items1[0]['lname'] +'<br>Email: '+ items1[0]['email'] +'<br>Cust ID: '+ items1[0]['cusid'] +'<br>Address:<br>');
+document.write(items1[0]['street'] + "<br>" + items1[0]['city'] + " " + items1[0]['state'] + "  " + items1[0]['zip']);
+document.write("</td></tr>"); 
+document.write('<tr><th>Item Number</th><th>Product</th><th>Code</th><th>Manufacturer</th><th>Quantity</th><th>Unit Price</th><th>Subtotal</th></tr>');	
+var t = 0;
+for (var j = 0; j < items1.length; j++){
+      document.write("<tr>"); 
+		document.write("<td>" + items1[j]['no'] + "</td>"); 
+		document.write('<td><img src="https://sfsqlblogimages.s3.amazonaws.com/product-images/' + items1[j]['image'] + '"/><br>' + items1[j]['name'] + '</td>'); 
+	   document.write("<td>" + items1[j]['code'] + "</td>"); 
+		document.write("<td>" + items1[j]['manname'] + "</td>");
+		document.write("<td>" + items1[j]['quantity'] + "</td>"); 
+		document.write("<td>" + items1[j]['price'] + "</td>"); 
+		document.write("<td>" + items1[j]['price'] * items1[j]['quantity'] + "</td>"); 
+		document.write("</tr>");
+		var subtot = items1[j]['price'] * items1[j]['quantity'];
+      t += subtot;	
+	} 
+document.write('<tr><td colspan="6" align="right">Total:</td><td>' + t + '</td></tr>');
+document.write("</table>");
+
+//Order	2
+document.write("<br><br>"); 
+	
+document.write("<table>"); 
+document.write('<tr><td colspan="7"><b>Order 2</b></td></tr>');	
+document.write("<tr>"); 
+document.write('<td colspan="7">Order ID: ' + items2[0]['orderid'] + '<br>Customer: ' + items2[0]['fname'] + ' ' + items2[0]['lname'] +'<br>Email: '+ items2[0]['email'] +'<br>Cust ID: '+ items2[0]['cusid'] +'<br>Address:<br>');
+document.write(items2[0]['street'] + "<br>" + items2[0]['city'] + " " + items2[0]['state'] + "  " + items2[0]['zip']);
+document.write("</td></tr>"); 
+document.write('<tr><th>Item Number</th><th>Product</th><th>Code</th><th>Manufacturer</th><th>Quantity</th><th>Unit Price</th><th>Subtotal</th></tr>');	
+var t = 0;
+for (var j = 0; j < items2.length; j++){
+      document.write("<tr>"); 
+		document.write("<td>" + items2[j]['no'] + "</td>"); 
+		document.write('<td><img src="https://sfsqlblogimages.s3.amazonaws.com/product-images/' + items2[j]['image'] + '"/><br>' + items2[j]['name'] + '</td>'); 
+	   document.write("<td>" + items2[j]['code'] + "</td>"); 
+		document.write("<td>" + items2[j]['manname'] + "</td>");
+		document.write("<td>" + items2[j]['quantity'] + "</td>"); 
+		document.write("<td>" + items2[j]['price'] + "</td>"); 
+		document.write("<td>" + items2[j]['price'] * items2[j]['quantity'] + "</td>"); 
+		document.write("</tr>");
+		var subtot = items2[j]['price'] * items2[j]['quantity'];
+      t += subtot;	
+	} 
+document.write('<tr><td colspan="6" align="right">Total:</td><td>' + t + '</td></tr>');
+document.write("</table>");
+document.write("<br><br>"); 
+    
+  </script>
+
+
+
+<div id="footer" class="scrollsensor">
+	<div class="footerGrid">
+				<div class="footerCol">
+			<div class="footerColHdr">Resources</div>
+			<a href="https://schemafreesql.com/faq.html">FAQ</a>
+			<a href="https://schemafreesql.com/doc/index.html">Docs</a>
+			<a href="https://schemafreesql.com/pricing.html">Pricing</a>
+						<a href="/createaccount.html">Create Account</a><a href="/sign-in.html">Sign In</a>			<a href="/support.html">Support</a>
+		</div>
+		<div class="footerCol">
+			<div class="footerColHdr">Contact</div>
+			<a href="https://github.com/SchemaFreeSQL">GitHub</a>
+			<a href="mailto:support@schemafreesql.com">Email:support@schemafreesql.com</a>
+			<a href="https://twitter.com/SchemafreeSQL">Twitter</a> 
+		</div>
+		<div class="footerCol">
+			<div class="footerColHdr">Legal</div>
+			<a href="https://schemafreesql.com/privacy.html" target="community">Privacy</a>
+			<a href="https://schemafreesql.com/SFSQLEULA.html" target="community">End User License Agreement</a>
+			<a href="https://schemafreesql.com/termsofservice.html" target="community">Terms Of Service</a>
+		</div>
+	</div>
+	<div>&copy; 2012-2022 Xornet, Inc.</div>
+</div>
+
+	</body>
+</html>

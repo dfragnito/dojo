@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>SchemafreeSQL Demo ToDo</title>
+	<meta property='og:title' content='SchemafreeSQL Demo Netlify Site'/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="description" content="SchemafreeSQL empowers your SQL database">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	<link rel="stylesheet" href="https://schemafreesql.com/cssreset-min.css">
+	<link rel="stylesheet" href="https://schemafreesql.com/main.css">
+
+	<!--  favicon - start -->
+	<link rel="apple-touch-icon" sizes="180x180" href="https://schemafreesql.com/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://schemafreesql.com/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://schemafreesql.com/favicons/favicon-16x16.png">
+	<link rel="mask-icon" href="https://schemafreesql.com/favicons/safari-pinned-tab.svg" color="#2e5696">
+	<link rel="shortcut icon" href="https://schemafreesql.com/favicons/favicon.ico">
+	<meta name="msapplication-TileColor" content="#2e5696">
+	<meta name="msapplication-config" content="https://schemafreesql.com/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<meta name="apple-mobile-web-app-title" content="SFSQL">
+	<!--  favicon - end -->
+	<link rel="stylesheet" href="https://schemafreesql.com/grid.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet"></link>
+  </head>
+  <body >
+   <nav>
+	<div class="logo">
+	 <a href="/"><img id="svglogo" src="https://schemafreesql.com/images/logo-schemafreesql.svg" title="SchemafreeSQL" alt="SchemafreeSQL"></a>
+	<a href="/"><img id="svglogoicon" src="https://schemafreesql.com/favicon.ico" title="SchemafreeSQL" alt="SchemafreeSQL"></a>
+	 </div>
+	<div style="display:flex; flex-direction:row">
+		<div class="topMenuLinkGroup">
+												<!--<a class="topPlainAnchor showInHome"  href="createaccount.html">Create Account</a>-->
+		</div>
+		<div class="topCtaGroup">
+			<a class="nav_twitter" href="https://twitter.com/SchemafreeSQL">
+				<svg width="35" height="35" viewBox="0 0 35 35"><path d="M11.895 29.776c11.401 0 17.638-9.447 17.638-17.639 0-.268 0-.535-.018-.8a12.612 12.612 0 0 0 3.092-3.21 12.37 12.37 0 0 1-3.56.976 6.22 6.22 0 0 0 2.725-3.43 12.424 12.424 0 0 1-3.936 1.506 6.205 6.205 0 0 0-10.564 5.653A17.6 17.6 0 0 1 4.496 6.355a6.204 6.204 0 0 0 1.919 8.276 6.153 6.153 0 0 1-2.814-.776v.078a6.201 6.201 0 0 0 4.974 6.077 6.189 6.189 0 0 1-2.8.106 6.206 6.206 0 0 0 5.792 4.305 12.439 12.439 0 0 1-9.174 2.57 17.55 17.55 0 0 0 9.502 2.78" fill-rule="evenodd"></path></svg>
+			</a>
+		
+		</div>
+	</div>
+
+	
+</nav>
+				<section id="hero" class="scrollsensor">
+					<div class="sectionWrap">
+				 <main>
+				 <h3>
+				 This Serverless (no servers to maintain) TODO App is powered by a  <a href="/.netlify/functions/todo" style="color: blue;">Netlify Function (AWS Lambda)</a>, calling a SFSQL Cloud DB, displayed on a "static" Netlify Site, deployed from GitHub.
+				 </h3>
+				   <div class="w-full h-full flex content-center justify-center mt-8">
+						<div class="bg-white shadow-md rounded px-8 pt-6 py-8 mb-4">
+						  <h1 class="block text-grey-800 text-md font-bold mb-2">Todos</h1>
+						  <div class="flex">
+							 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-800 leading-tight focus:outline-none focus:shadow-outline" type="text" name="name" placeholder="A new todo"></input>
+							 <button class="bg-blue-500 hover:bg-blue-800 text-white font-bold ml-2 py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="create" type="submit">Create</button>
+						  </div>
+						  <div class="mt-4" id="todos"></div>
+						</div>
+					 </div>
+					 </main>
+					</div>
+				</section>
+<div id="footer" class="scrollsensor">
+	<div class="footerGrid">
+				<div class="footerCol">
+			<div class="footerColHdr">Resources</div>
+			<a href="https://schemafreesql.com/faq.html">FAQ</a>
+			<a href="https://schemafreesql.com/doc/index.html">Docs</a>
+			<a href="https://schemafreesql.com/pricing.html">Pricing</a>
+						<a href="/createaccount.html">Create Account</a><a href="/sign-in.html">Sign In</a>			<a href="/support.html">Support</a>
+		</div>
+		<div class="footerCol">
+			<div class="footerColHdr">Contact</div>
+			<a href="https://github.com/SchemaFreeSQL">GitHub</a>
+			<a href="mailto:support@schemafreesql.com">Email:support@schemafreesql.com</a>
+			<a href="https://twitter.com/SchemafreeSQL">Twitter</a> 
+		</div>
+		<div class="footerCol">
+			<div class="footerColHdr">Legal</div>
+			<a href="https://schemafreesql.com/privacy.html" target="community">Privacy</a>
+			<a href="https://schemafreesql.com/SFSQLEULA.html" target="community">End User License Agreement</a>
+			<a href="https://schemafreesql.com/termsofservice.html" target="community">Terms Of Service</a>
+		</div>
+	</div>
+	<div>&copy; 2012-2022 Xornet, Inc.</div>
+</div>
+  <script>
+	  
+async function getTodos() {
+  const response = await fetch('/.netlify/functions/todo');
+  const todos = await response.json();
+  return todos
+} 
+
+
+var req = new XMLHttpRequest();
+req.open('GET','/.netlify/functions/todo', false);
+req.send(null);
+
+if(req.status == 200) {	
+   var data = JSON.parse(req.responseText);
+}
+	  
+      const defaultData = {todos: [] };
+      if (typeof data[0]["data"] !== 'undefined'){
+			   const string = JSON.stringify(data[0]["data"]);
+			   const string2 = string.slice(1,-1);
+			   const newtodo = `{"todos":[${string2}]}`
+            var newdata=JSON.parse(newtodo);      
+			}else{
+			   var newdata = defaultData
+			}
+	  window.todos = newdata.todos
+	  
+    var updateTodos = function(updatetodo) {
+      fetch("/.netlify/functions/todo", { 
+		method: 'POST', 
+		body: JSON.stringify({ todos: updatetodo }) })
+      populateTodos()
+    }
+    var completeTodo = function(evt) {
+      var checkbox = evt.target
+      var todoElement = checkbox.parentNode
+      var newTodoSet = [].concat(window.todos)
+      var todo = newTodoSet.find(t => t.id == todoElement.dataset.todo)
+      todo.completed = !todo.completed
+      window.todos = newTodoSet
+      updateTodos(todo)
+    }
+    var populateTodos = function() {
+      var todoContainer = document.querySelector("#todos")
+      todoContainer.innerHTML = null
+      window.todos.forEach(todo => {
+        var el = document.createElement("div")
+        el.className = "border-t py-4"
+        el.dataset.todo = todo.id
+        var name = document.createElement("span")
+        name.className = todo.completed ? "line-through" : ""
+        name.textContent = todo.name
+        var checkbox = document.createElement("input")
+        checkbox.className = "mx-4"
+        checkbox.type = "checkbox"
+        checkbox.checked = todo.completed ? 1 : 0
+        checkbox.addEventListener('click', completeTodo)
+        el.appendChild(checkbox)
+        el.appendChild(name)
+        todoContainer.appendChild(el)
+      })
+    }
+    populateTodos()
+    var createTodo = function() {
+      var input = document.querySelector("input[name=name]")
+      if (input.value.length) {
+        window.todos = [].concat(todos, { id: window.todos.length + 1, name: input.value, completed: false })
+        todo = { id: window.todos.length + 1, name: input.value, completed: false }
+        input.value = ""
+        updateTodos(todo)
+      }
+    }
+    document.querySelector("#create").addEventListener('click', createTodo)
+  </script>
+ </body>
+</html>
