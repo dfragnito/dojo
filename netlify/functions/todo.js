@@ -14,7 +14,7 @@ const QData = `[{"query":{"sfsql":"SELECT $i:.${ip}.todos.id as id, $s:.${ip}.to
 		  return {
         statusCode: 302,
         headers: {
-            "Location": "/?id=" + id,
+            "Location": "/todo?id=" + id,
                  },
          };
 			
