@@ -37,9 +37,9 @@ const QData = `[{"query":{"sfsql":"SELECT  $o:.${ip}.todos.oid() as oid, $i:.${i
 		 }		 
 	}else{
 			const updatedtodo = JSON.parse(event.body)
-			const oid = updatedtodo.todos.oid;
 			const todostring=JSON.stringify(updatedtodo.todos);
-			if( oid !== undefined ){
+			if( updatedtodo.todos.oid !== undefined ){
+			const oid = updatedtodo.todos.oid;
 			const putData = `[{"modify":{"data":{"o:cftodos":{"${ip}":{"todos":[{"#set":{"where":"$o:todos.oid()=${oid}"}},${todostring}]}}}}}]`
 			}else{
 			const putData = `[{"modify":{"data":{"o:cftodos":{"${ip}":{"todos":[{"#append":{}},${todostring}]}}}}}]`
