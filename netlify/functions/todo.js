@@ -5,7 +5,8 @@ exports.handler = async (event, context) => {
 //console.log(`{\ncontext: ${JSON.stringify(context,null,2)},\nevent: ${JSON.stringify(event,null,2)}\n}`);
 const ipa = event.headers['x-nf-client-connection-ip'];
 const ip = ipa.replace(/\./g, '').replace(/\:/g, '');	
-const QData = `[{"query":{"sfsql":"SELECT  $o:.${ip}.todos.oid() as oid, $i:.${ip}.todos.id as id, $s:.${ip}.todos.name as name, $b:.${ip}.todos.completed as completed"}}]`;
+//const QData = `[{"query":{"sfsql":"SELECT  $o:.${ip}.todos.oid() as oid, $i:.${ip}.todos.id as id, $s:.${ip}.todos.name as name, $b:.${ip}.todos.completed as completed"}}]`;
+const QData = `[{"query":{"sfsql":"SELECT  $o:.${ip}.todos.oid() as oid, $s:.${ip}.todos.name as name, $b:.${ip}.todos.completed as completed"}}]`;
 	if (event.httpMethod == "GET") {	
 		
 	if(event.queryStringParameters.id){
