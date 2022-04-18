@@ -45,6 +45,45 @@ a:hover {
 a:active {
   color: blue;
 }
+		   
+{
+  box-sizing: border-box;
+}
+textarea {
+  border-color: #eee;
+  border-width: 1px;
+  margin: 10px  10px 10px 6px
+}
+label, textarea, input {
+  display: block;
+   margin: 10px  10px 10px 6px;
+}
+input {
+  border-style: solid;
+  border-width: 1px;
+  margin: 10px  10px 10px 6px;
+}
+.link {
+  cursor:pointer;
+  color:blue;
+  text-decoration:underline;
+}
+.link-through {
+  cursor:pointer;
+  color:blue;
+  text-decoration: line-through;
+}
+.details{
+   margin: 10px  10px 10px 6px;
+   -moz-box-shadow: 0 0 3px #ccc;
+   -webkit-box-shadow: 0 0 3px #ccc;
+   box-shadow: 0 0 3px #ccc;
+   display: none;
+}
+.desc{
+   margin: 10px  10px 10px 6px;
+   border:1px solid black;
+}
 </style>
   </head>
   <body >
@@ -73,16 +112,27 @@ a:active {
 				 <h3>
 				 This Serverless (no servers to maintain) TODO App is powered by a  <a href="/.netlify/functions/todo" style="color: blue;">Netlify Function (AWS Lambda)</a>, calling a SFSQL Cloud DB, displayed on a "static" Netlify Site, deployed from GitHub.
 				 </h3>
-				   <div class="w-full h-full flex content-center justify-center mt-8">
+				<div id="focus"></div>
+				  <div  id="tododetail" class="details">
+					  <span id="todoinput"></span>
+					  <b>Details</b> <br>
+					  <div class="desc" id="tododesc" contentEditable="true">
+						
+					  </div>
+					  <button onclick="updateTodo()" class="bg-blue-500 hover:bg-blue-800 text-white font-bold ml-2 py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="updatetodo">Update</button>
+					  <a href="#" onclick="closeDetail()">close<a>
+				  </div>
+					 
+				   <div  class="w-full h-full flex content-center justify-center mt-8">
 						<div class="bg-white shadow-md rounded px-8 pt-6 py-8 mb-4">
 						  <h1 class="block text-grey-800 text-md font-bold mb-2">Todos</h1>
-						  <div class="flex">
+						  <div id="create" class="flex">
 							 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-800 leading-tight focus:outline-none focus:shadow-outline" type="text" name="name" placeholder="A new todo"></input>
 							 <button class="bg-blue-500 hover:bg-blue-800 text-white font-bold ml-2 py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="create" type="submit">Create</button>
 						  </div>
 						  <div class="mt-4" id="todos"></div>
 						</div>
-					 </div>
+					</div>
 					 </main>
 					</div>
 				</section>
@@ -111,14 +161,51 @@ a:active {
 	<div>&copy; 2012-2022 Xornet, Inc.</div>
 </div>
   <script>
-	  
-async function getTodos() {
-  const response = await fetch('/.netlify/functions/todo');
-  const todos = await response.json();
-  return todos
+function closeDetail(){
+var x = document.getElementById("tododetail");
+var y = document.getElementById("create");
+x.style.display = "none";
+y.style.display = "block";
+}
+function todoDetail(evt){
+ var click = evt.target
+ var todoElement = click.parentNode
+ var newTodoSet = [].concat(window.todos)
+ var todo = newTodoSet.find(t => t.oid == todoElement.dataset.todo)
+var x = document.getElementById("tododetail");
+var y = document.getElementById("create");
+x.style.display = "block";
+y.style.display = "none";
+var todoContainer = document.querySelector("#todoinput")
+todoContainer.innerHTML = null
+var el = document.createElement("div")
+el.dataset.todo = todo.oid
+var input = document.createElement("input")
+input.type = "text"
+input.value = todo.name
+input.id="todoname"
+input.name="todoname"
+var checkbox = document.createElement("input")
+checkbox.type = "checkbox"
+checkbox.id="todocompleted"
+checkbox.name="todocompleted"
+checkbox.checked = todo.completed ? 1 : 0
+var hidden = document.createElement("input")
+hidden.type = "hidden"
+hidden.value = todo.oid
+hidden.id="todooid"
+hidden.name="todooid"
+el.appendChild(input)
+el.appendChild(checkbox)
+el.appendChild(hidden)
+todoContainer.appendChild(el)
+document.getElementById('tododesc').textContent = todo.desc
+document.getElementById("focus").scrollIntoView();
 } 
 
 
+	  
+function getTodos() {
 var req = new XMLHttpRequest();
 req.open('GET','/.netlify/functions/todo', false);
 req.send(null);
@@ -126,7 +213,6 @@ req.send(null);
 if(req.status == 200) {	
    var data = JSON.parse(req.responseText);
 }
-	  
       const defaultData = {todos: [] };
       if (typeof data[0]["data"] !== 'undefined'){
 			   const string = JSON.stringify(data[0]["data"]);
@@ -136,39 +222,52 @@ if(req.status == 200) {
 			}else{
 			   var newdata = defaultData
 			}
-	  window.todos = newdata.todos
+ window.todos = newdata.todos
+ return window.todos	
+} 
+
 	  
-    var updateTodos = function(updatetodo) {
-      fetch("/.netlify/functions/todo", { 
-		method: 'POST', 
-		body: JSON.stringify({ todos: updatetodo }) })
-      populateTodos()
+ var updateTodos = function(updatetodo) {
+	 var req = new XMLHttpRequest();
+      req.open('POST','/.netlify/functions/todo', false);
+      req.send(JSON.stringify({ todos: updatetodo }) );
+	 
+	 if(req.status == 200) {	
+		  populateTodos()
+	  }	
+ }
+	  
+  var updateTodo = function() {
+	  var name = document.getElementById("todoname").value;
+	  var oid = document.getElementById("todooid").value;
+	  var completed = document.getElementById("todocompleted").checked;
+      var desc = document.getElementById("tododesc").textContent;
+	  todo = { name: name, completed: completed, oid: oid, desc: desc }
+      updateTodos(todo)
     }
-    var completeTodo = function(evt) {
+	  
+   var completeTodo = function(evt) {
       var checkbox = evt.target
       var todoElement = checkbox.parentNode
       var newTodoSet = [].concat(window.todos)
-      var todo = newTodoSet.find(t => t.id == todoElement.dataset.todo)
+      var todo = newTodoSet.find(t => t.oid == todoElement.dataset.todo)
       todo.completed = !todo.completed
-      window.todos = newTodoSet
       updateTodos(todo)
     }
-    var populateTodos = function() {
+	  
+   var populateTodos = function() {
+	  window.todos = getTodos()
       var todoContainer = document.querySelector("#todos")
       todoContainer.innerHTML = null
       window.todos.forEach(todo => {
         var el = document.createElement("div")
         el.className = "border-t py-4"
-        el.dataset.todo = todo.id
-		var link = document.createElement("a");
-        link.setAttribute("href", `/.netlify/functions/todo?id=${todo.id}`);
+        el.dataset.todo = todo.oid
         var name = document.createElement("span")
-		var txt = link.href;
-		var textNode = document.createTextNode(todo.name);
-        name.className = todo.completed ? "line-through" : ""
-        //name.textContent = todo.name
-		link.appendChild(textNode);
-        name.appendChild(link);
+		name.className = "link"
+        name.className = todo.completed ? "link-through" : "link"
+        name.textContent = todo.name
+		name.addEventListener('click', todoDetail)
         var checkbox = document.createElement("input")
         checkbox.className = "mx-4"
         checkbox.type = "checkbox"
@@ -183,13 +282,14 @@ if(req.status == 200) {
     var createTodo = function() {
       var input = document.querySelector("input[name=name]")
       if (input.value.length) {
-        window.todos = [].concat(todos, { id: window.todos.length + 1, name: input.value, completed: false })
-        todo = { id: window.todos.length + 1, name: input.value, completed: false }
+        todo = { name: input.value, completed: false, oid: 0 }
         input.value = ""
         updateTodos(todo)
       }
     }
+	  
     document.querySelector("#create").addEventListener('click', createTodo)
-  </script>
+	  
+   </script>
  </body>
 </html>
