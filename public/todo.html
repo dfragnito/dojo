@@ -222,10 +222,10 @@ if(req.status == 200) {
 			}else{
 			   var newdata = defaultData
 			}
- window.todos = newdata.todos
- return window.todos	
+ //window.todos = newdata.todos
+ return newdata.todos
 } 
-
+   window.todos=getTodos
 	  
  var updateTodos = function(updatetodo) {
 	 var req = new XMLHttpRequest();
@@ -233,8 +233,20 @@ if(req.status == 200) {
       req.send(JSON.stringify({ todos: updatetodo }) );
 	 
 	 if(req.status == 200) {	
-		  populateTodos()
+	   var data = JSON.parse(req.responseText);
 	  }	
+	  
+	  const defaultData = {todos: [] };
+      if (typeof data[0]["data"] !== 'undefined'){
+			   const string = JSON.stringify(data[0]["data"]);
+			   const string2 = string.slice(1,-1);
+			   const newtodo = `{"todos":[${string2}]}`
+            var newdata=JSON.parse(newtodo);      
+			}else{
+			   var newdata = defaultData
+			}
+	  
+	  populateTodos(newdata.todos)
  }
 	  
   var updateTodo = function() {
@@ -255,8 +267,9 @@ if(req.status == 200) {
       updateTodos(todo)
     }
 	  
-   var populateTodos = function() {
-	  window.todos = getTodos()
+   var populateTodos = function(newtodos) {
+	 // window.todos = getTodos()
+	   window.todos = newtodos
       var todoContainer = document.querySelector("#todos")
       todoContainer.innerHTML = null
       window.todos.forEach(todo => {
@@ -278,7 +291,7 @@ if(req.status == 200) {
         todoContainer.appendChild(el)
       })
     }
-    populateTodos()
+    populateTodos(window.todos)
     var createTodo = function() {
       var input = document.querySelector("input[name=name]")
       if (input.value.length) {

@@ -5,9 +5,11 @@ exports.handler = async (event, context) => {
 //console.log(`{\ncontext: ${JSON.stringify(context,null,2)},\nevent: ${JSON.stringify(event,null,2)}\n}`);
 const ipa = event.headers['x-nf-client-connection-ip'];
 const ip = ipa.replace(/\./g, '').replace(/\:/g, '');	
-const QData = `[{"query":{"sfsql":"SELECT  $o:.${ip}.todos.oid() as oid, $s:.${ip}.todos.name as name, $b:.${ip}.todos.completed as completed,$$s:.${ip}.todos.desc as desc ORDER BY oid ASC"}}]`;
+
 
 	if (event.httpMethod == "GET") {	
+	
+	const QData = `[{"query":{"sfsql":"SELECT  $o:.${ip}.todos.oid() as oid, $s:.${ip}.todos.name as name, $b:.${ip}.todos.completed as completed,$$s:.${ip}.todos.desc as desc ORDER BY oid ASC"}}]`;
 		 
 				return fetch(API_ENDPOINT, {
 					  headers: {
@@ -29,7 +31,7 @@ const QData = `[{"query":{"sfsql":"SELECT  $o:.${ip}.todos.oid() as oid, $s:.${i
 			const oid = updatedtodo.todos.oid;
 			const todostring=JSON.stringify(updatedtodo.todos);
 			console.log(todostring);
-			const putData = `[{"modify":{"data":{"o:cftodos":{"${ip}":{"todos":[{"#set":{"where":"$o:todos.oid()=${oid}"}},${todostring}]}}}}}]`
+			const putData = `[{"modify":{"data":{"o:cftodos":{"${ip}":{"todos":[{"#set":{"where":"$o:todos.oid()=${oid}"}},${todostring}]}}}}},{"query":{"sfsql":"SELECT  $o:.${ip}.todos.oid() as oid, $s:.${ip}.todos.name as name, $b:.${ip}.todos.completed as completed,$$s:.${ip}.todos.desc as desc ORDER BY oid ASC"}}]`
 			return fetch(API_ENDPOINT, {
 					  headers: {
 							"content-type": "application/json",
