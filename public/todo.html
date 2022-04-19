@@ -227,7 +227,7 @@ if(req.status == 200) {
       req.open('POST','/.netlify/functions/todo', false);
       req.send(JSON.stringify({ todos: updatetodo }) );
 	// this request will update the changed TODO and get all the TODOS back (same query as get todo)
-	// Could have updated the windows.todo object client side, but in case we make several changes at once or add more complex structure to a todo 
+	// Could have updated the windows.todos object client side, but in case we make several changes at once or add more complex structure to a todo 
 	// getting all the todos back in with a query is a better option
 	 if(req.status == 200) {	
 	   var data = JSON.parse(req.responseText);
