@@ -215,16 +215,10 @@ if(req.status == 200) {
 }
       const defaultData = {todos: [] };
       if (typeof data[0]["data"] !== 'undefined'){
-			   //const string = JSON.stringify(data[0]["data"]);
-			   //const string2 = string.slice(1,-1);
-			   //const newtodo = `{"todos":[${string2}]}`
-            //var newdata=JSON.parse(newtodo); 
              return 	data[0]["data"]			
 			}else{
-			   //var newdata = defaultData
 				return defaultData.todos
 			}
- //return newdata.todos
 } 
    window.todos=getTodos()
 	  
@@ -241,14 +235,9 @@ if(req.status == 200) {
 	  
 	  const defaultData = {todos: [] };
       if (typeof data[1]["data"] !== 'undefined'){
-			   //const string = JSON.stringify(data[1]["data"]);
-			   //const string2 = string.slice(1,-1);
-			   //const newtodo = `{"todos":[${string2}]}`
-            //var newdata=JSON.parse(newtodo); 
             var todos=data[1]["data"]				
 			}else{
-			   //var newdata = defaultData
-				var todos = defaultData.todos
+			  var todos = defaultData.todos
 			}
 	  populateTodos(todos)
  }
