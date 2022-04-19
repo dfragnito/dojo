@@ -209,21 +209,22 @@ function getTodos() {
 var req = new XMLHttpRequest();
 req.open('GET','/.netlify/functions/todo', false);
 req.send(null);
-
+//gets all the todos 
 if(req.status == 200) {	
    var data = JSON.parse(req.responseText);
 }
       const defaultData = {todos: [] };
       if (typeof data[0]["data"] !== 'undefined'){
-			   const string = JSON.stringify(data[0]["data"]);
-			   const string2 = string.slice(1,-1);
-			   const newtodo = `{"todos":[${string2}]}`
-            var newdata=JSON.parse(newtodo);      
+			   //const string = JSON.stringify(data[0]["data"]);
+			   //const string2 = string.slice(1,-1);
+			   //const newtodo = `{"todos":[${string2}]}`
+            //var newdata=JSON.parse(newtodo); 
+             return 	data[0]["data"]			
 			}else{
-			   var newdata = defaultData
+			   //var newdata = defaultData
+				return defaultData.todos
 			}
- //window.todos = newdata.todos
- return newdata.todos
+ //return newdata.todos
 } 
    window.todos=getTodos()
 	  
@@ -231,21 +232,25 @@ if(req.status == 200) {
 	 var req = new XMLHttpRequest();
       req.open('POST','/.netlify/functions/todo', false);
       req.send(JSON.stringify({ todos: updatetodo }) );
-	 
+	// this request will update the changed TODO and get all the TODOS back (same query as get todo)
+	// Could have updated the windows.todo object client side, but in case we make several changes at once or add more complex structure to a todo 
+	// getting all the todos back in with a query is a better option
 	 if(req.status == 200) {	
 	   var data = JSON.parse(req.responseText);
 	  }	
 	  
 	  const defaultData = {todos: [] };
       if (typeof data[1]["data"] !== 'undefined'){
-			   const string = JSON.stringify(data[1]["data"]);
-			   const string2 = string.slice(1,-1);
-			   const newtodo = `{"todos":[${string2}]}`
-            var newdata=JSON.parse(newtodo);      
+			   //const string = JSON.stringify(data[1]["data"]);
+			   //const string2 = string.slice(1,-1);
+			   //const newtodo = `{"todos":[${string2}]}`
+            //var newdata=JSON.parse(newtodo); 
+            var todos=data[1]["data"]				
 			}else{
-			   var newdata = defaultData
+			   //var newdata = defaultData
+				var todos = defaultData.todos
 			}
-	  populateTodos(newdata.todos)
+	  populateTodos(todos)
  }
 	  
   var updateTodo = function() {
@@ -266,9 +271,8 @@ if(req.status == 200) {
       updateTodos(todo)
     }
 	  
-   var populateTodos = function(newtodos) {
-	 // window.todos = getTodos()
-	   window.todos = newtodos
+   var populateTodos = function(todos) {
+	   window.todos = todos
       var todoContainer = document.querySelector("#todos")
       todoContainer.innerHTML = null
       window.todos.forEach(todo => {
@@ -290,7 +294,9 @@ if(req.status == 200) {
         todoContainer.appendChild(el)
       })
     }
+	 
     populateTodos(window.todos)
+	 
     var createTodo = function() {
       var input = document.querySelector("input[name=name]")
       if (input.value.length) {
