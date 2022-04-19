@@ -225,7 +225,7 @@ if(req.status == 200) {
  //window.todos = newdata.todos
  return newdata.todos
 } 
-   window.todos=getTodos
+   window.todos=getTodos()
 	  
  var updateTodos = function(updatetodo) {
 	 var req = new XMLHttpRequest();
