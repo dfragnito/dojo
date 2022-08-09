@@ -289,7 +289,7 @@ if(req.status == 200) {
     var createTodo = function() {
       var input = document.querySelector("input[name=name]")
       if (input.value.length) {
-        todo = { name: input.value, completed: false, oid: 0 }
+        todo = { name: input.value, completed: false, oid: 0, desc: "" }
         input.value = ""
         updateTodos(todo)
       }
