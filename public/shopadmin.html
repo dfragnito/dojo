@@ -80,8 +80,8 @@ th, td {
 //}
 async function getShop() {
    const resp = await fetch("/.netlify/functions/shop");
-   const jsonData = await resp.json();
-   return jsonData;
+   const Data = await resp.text();
+   return Data;
 }
   var obj = JSON.parse(getShop);
 	 
