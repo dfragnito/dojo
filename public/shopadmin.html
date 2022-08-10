@@ -70,20 +70,20 @@ th, td {
   <script>
   
 
-//var req = new XMLHttpRequest();
+var req = new XMLHttpRequest();
 
-//req.open('GET', '/.netlify/functions/shop');
-//req.send(null);
+req.open('GET', '/.netlify/functions/shop',false);
+req.send(null);
 
-//if(req.status == 200) {
-  // var obj = JSON.parse(req.responseText);
-//}
-async function getShop() {
-   const resp = await fetch("/.netlify/functions/shop");
-   const Data = await resp.text();
-   return Data;
+if(req.status == 200) {
+  var obj = JSON.parse(req.responseText);
 }
-  var obj = JSON.parse(getShop);
+//async function getShop() {
+   //const resp = await fetch("/.netlify/functions/shop");
+   //const Data = await resp.text();
+   //return Data;
+//}
+ // var obj = JSON.parse(getShop);
 	 
 	 let sups = obj.filter(supp => supp._q == "supp")[0]["data"];
 	 let prods = obj.filter(prod => prod._q == "prod")[0]["data"]; 
