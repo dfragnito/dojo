@@ -158,6 +158,10 @@ document.write("<br><br>");
  </body>
 	 </html>`;
 	 
+const fetch = require("node-fetch");
+const API_ENDPOINT = process.env.endpoint;
+
+exports.handler = async (event, context) => {
 function randomString(length, chars) {
     var result = '';
     for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
@@ -348,12 +352,8 @@ const sfsqlReqPayload=`[
 		}
 	}
 ]`;
-
-const fetch = require("node-fetch");
-
-const API_ENDPOINT = process.env.endpoint;
-
-exports.handler = async (event, context) => {
+	
+	
   return fetch(API_ENDPOINT, {
 	  headers: {
 		   "content-type": "application/json",
