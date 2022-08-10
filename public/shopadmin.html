@@ -78,9 +78,12 @@ th, td {
 //if(req.status == 200) {
   // var obj = JSON.parse(req.responseText);
 //}
-fetch('/.netlify/functions/shop')
-  .then((response) => response.json())
-  .then((data) => var obj = data);
+(async () => {
+   const resp = await fetch("/.netlify/functions/shop");
+   const jsonData = await resp.json();
+   //console.log("jsonData: ", jsonData);
+   var obj = jsonData;
+})();
   
 	 
 	 let sups = obj.filter(supp => supp._q == "supp")[0]["data"];
