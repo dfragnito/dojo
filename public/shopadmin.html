@@ -78,7 +78,7 @@ th, td {
 //if(req.status == 200) {
   // var obj = JSON.parse(req.responseText);
 //}
-async function getShop() => {
+async function getShop() {
    const resp = await fetch("/.netlify/functions/shop");
    const jsonData = await resp.json();
    return jsonData;
