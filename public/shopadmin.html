@@ -83,7 +83,7 @@ async function getShop() {
    const jsonData = await resp.json();
    return jsonData;
 }
-  var obj = getShop;
+  var obj = JSON.parse(getShop);
 	 
 	 let sups = obj.filter(supp => supp._q == "supp")[0]["data"];
 	 let prods = obj.filter(prod => prod._q == "prod")[0]["data"]; 
