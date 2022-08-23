@@ -14,9 +14,6 @@
   <div id="cy"></div>
 </div>
 <script>
-var cy = cytoscape(
-{
-
 var req = new XMLHttpRequest();
 
 req.open('GET', '/.netlify/functions/got',false);
@@ -25,6 +22,9 @@ req.send(null);
 if(req.status == 200) {
   var data = JSON.parse(req.responseText);
 }
+
+var cy = cytoscape(
+{
 
 var str1 = '' 
 
