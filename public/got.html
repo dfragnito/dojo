@@ -37,12 +37,12 @@ while (i < data[0]["data"].length) {
 
 }
 
-let str2= '' 
+let newstr1 = str1.slice(0, -1);
  
 let j = 0;
 while (j < data[1]["data"].length) {
 
-  str2 += `{
+  newstr1 += `{
       "data":{
 			"id":"${data[1]['data'][j]["id"]}",
 			"source":"${data[1]['data'][j]["source"]}",
@@ -53,10 +53,10 @@ while (j < data[1]["data"].length) {
 
 }
 
-let newstr2 = str2.slice(0, -1);
+let str2 = newstr1.slice(0, -1);
 
-//console.log(newstr2)
-let str3 = str1.concat(newstr2);
+console.log(newstr2)
+
 console.log(str3)
 var cy = cytoscape(
 {
