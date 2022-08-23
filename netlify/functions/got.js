@@ -30,7 +30,7 @@ const sfsqlReqPayload=`[
     .then((data) => ({
 		  //var data = JSON.parse(data)
 		  
-		  let str1 = '' 
+		  let str1 = '';
 
 			let i = 0;
 			while (i < data[0]["data"].length) {
@@ -47,7 +47,7 @@ const sfsqlReqPayload=`[
 
 			//let newstr1 = str1.slice(0, -1);
 			 
-			let str2 = ''
+			let str2 = '';
 			let j = 0;
 			while (j < data[1]["data"].length) {
 
