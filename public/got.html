@@ -24,7 +24,7 @@ if(req.status == 200) {
    var nodes = req.responseText;
 }
 
-console.log(nodes);
+console.log(JSON.parse(nodes));
 
 var cy = cytoscape(
 {
