@@ -41,7 +41,7 @@ if(req.status == 200) {
 //console.log(JSON.parse(got));
 //console.log(JSON.parse(edges));
 var str = nodes.concat(edges);
-const element = [ str ]
+const elements = [ str ]
 var cy = cytoscape(
 {
 container: document.getElementById('cy'), // container to render in
