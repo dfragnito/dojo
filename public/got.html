@@ -56,14 +56,15 @@ while (j < data[1]["data"].length) {
 
 let newstr2 = str2.slice(0, -1);
 
-console.log(str1 newstr2)
+console.log(str1);
 
+console.log(newstr2);
 
 var cy = cytoscape(
 {
 container: document.getElementById('cy'), // container to render in
 // list of graph elements to start with
-  elements: [ str3 ],
+  elements: [str1 +  newstr2],
 
   style: [
     {
