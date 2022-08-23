@@ -45,7 +45,8 @@ while (i < data[1]["data"].length) {
   str2 += `{
       "data":{
 			"id":"${data[1]['data'][j]["id"]}",
-			"label":"${data[1]['data'][j]["label"]}" 
+			"source":"${data[1]['data'][j]["source"]}",
+         "target":"${data[1]['data'][j]["target"]}"			
 			}
           },`
   i++;
@@ -54,10 +55,10 @@ while (i < data[1]["data"].length) {
 
 let newstr2 = str2.slice(0, -1);
 
-alert(newstr2)
+//alert(newstr2)
 
 let str3 = str1.concat(newstr2);
-//alert(str3)
+alert(str3)
 var cy = cytoscape(
 {
 container: document.getElementById('cy'), // container to render in
