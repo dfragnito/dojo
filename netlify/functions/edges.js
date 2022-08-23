@@ -6,12 +6,6 @@ exports.handler = async (event, context) => {
         const sfsqlReqPayload=`[
 												{
 													"query": {
-														"sfsql": "SELECT $s:.Node.id as id, $s:.Node.label as label where  $s:.Node.type='character'"
-													},
-													"_comment": "nodes"
-												},
-												{
-													"query": {
 														"sfsql": "SELECT $o:.Node.edge.oid() as id, $s:.Node.id as source, $s:.Node.edge.Connection.id as target where $s:.Node.edge.Connection.type='character'"
 													},
 													"_comment": "edges"
@@ -28,21 +22,29 @@ exports.handler = async (event, context) => {
         };
         const response = await fetch(API_ENDPOINT, init);
         const data =  await response.json();
-		  const nodes = data[0]['data'];
-		  const edges = data[1]['data'];
-		  
+		  const edges = data[0]['data'];
 
+		  let str1 = ''; 
 
-			//const newstr2 = str2.slice(0, -1);
+			let i = 0;
 			
-			//const str3 = str1.concat(newstr2);
-		  
-		  
-		  
+			while (i < edges.length) {
+
+			  str1 += `{
+					"data":{
+						"id":"${edges[i]["id"]}",
+						"label":"${edges[i]['label']}" 
+						}
+						 },`
+			  i++;
+
+			}
+	
+		  const newstr1 = str1.slice(0, -1);
 		  
 		  return {
 				statusCode: 200,
-				body: JSON.stringify(str2),
+				body: JSON.stringify(newstr1),
 			 }; 
 		
 };	 
