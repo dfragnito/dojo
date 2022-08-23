@@ -61,7 +61,7 @@ exports.handler = async (event, context) => {
 
 			}
 
-			const newstr2 = str2.slice(0, -1);
+			//const newstr2 = str2.slice(0, -1);
 			
 			//const str3 = str1.concat(newstr2);
 		  
@@ -70,7 +70,7 @@ exports.handler = async (event, context) => {
 		  
 		  return {
 				statusCode: 200,
-				body: JSON.stringify(newstr2),
+				body: JSON.stringify(str2),
 			 }; 
 		
 };	 
