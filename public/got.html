@@ -37,8 +37,9 @@ while (i < data[0]["data"].length) {
 
 }
 
-let newstr1 = str1.slice(0, -1);
+//let newstr1 = str1.slice(0, -1);
  
+let str2 = ''
 let j = 0;
 while (j < data[1]["data"].length) {
 
@@ -53,11 +54,11 @@ while (j < data[1]["data"].length) {
 
 }
 
-let str2 = newstr1.slice(0, -1);
+let newstr2 = str2.slice(0, -1);
 
-console.log(newstr2)
+console.log(str1 newstr2)
 
-console.log(str3)
+
 var cy = cytoscape(
 {
 container: document.getElementById('cy'), // container to render in
