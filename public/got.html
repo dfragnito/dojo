@@ -1,0 +1,133 @@
+<html>
+<head>
+<script src="cytoscape.min.js"></script>
+</head>
+<body>
+<div id="container">
+  <style>
+  #cy {
+  width: 2000px;
+  height:1000px;
+  display: block;
+}
+  </style>
+  <div id="cy"></div>
+</div>
+<script>
+var cy = cytoscape(
+{
+
+var req = new XMLHttpRequest();
+
+req.open('GET', '/.netlify/functions/got',false);
+req.send(null);
+
+if(req.status == 200) {
+  var data = JSON.parse(req.responseText);
+}
+
+var str1 = '' 
+
+let i = 0;
+while (i < data[0]["data"].length) {
+
+  str1 += `{
+      "data":{
+			"id":"${data[0]['data'][i]["id"]}",
+			"label":"${data[0]['data'][i]["label"]}" 
+			}
+          },`
+  i++;
+
+}
+
+var str2= '' 
+ 
+let j = 0;
+while (i < data[1]["data"].length) {
+
+  str2 += `{
+      "data":{
+			"id":"${data[1]['data'][j]["id"]}",
+			"label":"${data[1]['data'][j]["label"]}" 
+			}
+          },`
+  i++;
+
+}
+
+const newstr2 = str2.slice(0, -1);
+let str3 = str1.concat(newstr2);
+
+  container: document.getElementById('cy'), // container to render in
+// list of graph elements to start with
+  elements: [ str3 ],
+
+  style: [
+    {
+      selector: "node",
+      css: {
+        "label": "data(label)",
+        "text-valign": "center",
+        "text-halign": "center",
+        'background-color': '#30c9bc'
+
+      }
+    },
+    {
+      selector: "edge",
+      css: {
+        "target-arrow-shape": "triangle",
+		  'line-color': '#a8eae5'
+      }
+    },
+    {
+      selector: ".background",
+      css: {
+        "text-background-opacity": 1,
+        "color": "#fff",
+        "text-background-color": "#000"
+      }
+    },
+    {
+      selector: ".outline",
+      css: {
+        "color": "#fff",
+        "text-outline-color": "#000",
+        "text-outline-width": 3
+      }
+    },
+    {
+      selector: ".top-center",
+      style: {
+        "text-valign": "top",
+        "text-halign": "center"
+      }
+    }
+  ],
+
+  layout: {
+    name: 'concentric',
+	fit: true,
+	padding: 30
+  }
+
+});
+cy.zoomingEnabled( true );
+cy.zoom({
+  level: .25
+});
+cy.bind('click ', 'node', function (evt) {
+    var pos = cy.nodes("[id = " + evt.target.data().id + "]").position();
+    cy.zoom({                       // Zoom to the specified position
+      level: 1.5,             // 0 <= yourLevel, maybe try out 1,2,3,4... and see what fits
+      position: pos
+    });
+});
+
+</script>
+
+
+
+</body>
+</html>
