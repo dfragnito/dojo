@@ -16,21 +16,21 @@
 <script>
 var req = new XMLHttpRequest();
 
-req.open('GET', '/.netlify/functions/got',false);
+req.open('GET', '/.netlify/functions/nodes',false);
 req.send(null);
 
 if(req.status == 200) {
-  //var data = JSON.parse(req.responseText);
-   var data = req.responseText;
+    //var nodes = JSON.parse(req.responseText);
+   var nodes = req.responseText;
 }
 
-console.log(data);
+console.log(nodes);
 
 var cy = cytoscape(
 {
 container: document.getElementById('cy'), // container to render in
 // list of graph elements to start with
-  elements: [data],
+  elements: [nodes],
 
   style: [
     {
