@@ -32,8 +32,9 @@ exports.handler = async (event, context) => {
 
 			  str1 += `{
 					"data":{
-						"id":"${edges[i]["id"]}",
-						"label":"${edges[i]['label']}" 
+						"id":"${edges[i]['id']}",
+						"source":"${edges[i]['source']}",
+						"target":"${edges[i]['target']}" 
 						}
 						 },`
 			  i++;
