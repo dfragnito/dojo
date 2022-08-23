@@ -28,7 +28,7 @@ exports.handler = async (event, context) => {
         };
         const response = await fetch(API_ENDPOINT, init);
         const data =  await response.json();
-		  const nodes = data[0]['data']
+		  const nodes = data[0]['data'];
 		  return {
 				statusCode: 200,
 				body: JSON.stringify(nodes),
