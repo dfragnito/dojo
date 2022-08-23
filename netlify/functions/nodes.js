@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
 			}
 	
 		   const newstr1 = str1.slice(0, -1);
-			const newstr1 += ']';
+		         newstr1 += ']';
 		  return {
 				statusCode: 200,
 				body: newstr1,
