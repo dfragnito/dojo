@@ -45,7 +45,7 @@ exports.handler = async (event, context) => {
 		  const newstr1 += ']';
 		  return {
 				statusCode: 200,
-				body: JSON.stringify(newstr1),
+				body: newstr1,
 			 }; 
 		
 };	 
