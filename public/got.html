@@ -37,15 +37,15 @@ if(req.status == 200) {
 			}
 	
 }
-var got = nodes + edges;
-console.log(JSON.parse(got));
+//var got = nodes + edges;
+//console.log(JSON.parse(got));
 //console.log(JSON.parse(edges));
 
 var cy = cytoscape(
 {
 container: document.getElementById('cy'), // container to render in
 // list of graph elements to start with
-  elements: [nodes],
+  elements: [nodes + ',' + edges],
 
   style: [
     {

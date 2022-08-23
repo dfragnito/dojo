@@ -39,10 +39,10 @@ exports.handler = async (event, context) => {
 
 			}
 	
-		  
+		   const newstr1 = str1.slice(0, -1);
 		  return {
 				statusCode: 200,
-				body: JSON.stringify(str1),
+				body: JSON.stringify(newstr1),
 			 }; 
 		
 };	 
