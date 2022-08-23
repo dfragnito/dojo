@@ -28,7 +28,7 @@ const sfsqlReqPayload=`[
 	  })
     .then((response) => response.json())
     .then((data) => ({
-		  var data = JSON.parse(data)
+		  //var data = JSON.parse(data)
 		  
 		  let str1 = '' 
 
