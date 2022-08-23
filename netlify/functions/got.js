@@ -28,8 +28,9 @@ const sfsqlReqPayload=`[
 	  })
     .then((response) => response.json())
     .then((data) => ({
+		let nodes = data[0]['data'];
       statusCode: 200,
-      body:JSON.stringify(data[0]['data']),
+      body:JSON.stringify(nodes),
     }))
     .catch((error) => ({ statusCode: 422, body: String(error) }));
 };	 
