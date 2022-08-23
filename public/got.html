@@ -37,9 +37,9 @@ if(req.status == 200) {
 			}
 	
 }
-
-console.log(JSON.parse(nodes));
-console.log(JSON.parse(edges));
+var got = nodes + edges;
+console.log(JSON.parse(got));
+//console.log(JSON.parse(edges));
 
 var cy = cytoscape(
 {
