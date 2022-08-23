@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
         const data =  await response.json();
 		  const edges = data[0]['data'];
 
-		  let str1 = ''; 
+		  let str1 = '['; 
 
 			let i = 0;
 			
@@ -42,7 +42,7 @@ exports.handler = async (event, context) => {
 			}
 	
 		  const newstr1 = str1.slice(0, -1);
-		  
+		  const newstr1 += ']';
 		  return {
 				statusCode: 200,
 				body: JSON.stringify(newstr1),
