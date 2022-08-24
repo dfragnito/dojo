@@ -42,8 +42,9 @@ if(req.status == 200) {
 //var got = nodes + edges;
 const nodesarrary=JSON.parse(nodes);
 const edgesarray=JSON.parse(edges);
-console.log(nodesarrary);
-console.log(edgesarray);
+const elements = nodesarrary.concat(edgesarray);
+//console.log(nodesarrary);
+console.log(elements);
 //var str = nodes.concat(edges);
 //const elements = [ JSON.parse(str) ];
 
@@ -56,7 +57,7 @@ var cy = cytoscape(
 {
 container: document.getElementById('cy'), // container to render in
 // list of graph elements to start with
-  //elements,
+  elements,
 
   style: [
     {
