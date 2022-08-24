@@ -45,14 +45,11 @@
 </nav>
 <section id="hero" class="scrollsensor">
 	<div class="sectionWrap">
-		<main>
-					
-				
-					
+		<main>				
 This is the <a href="https://schemafreesql.com">SchemafreeSQL</a> GOT Most Connected Demo.<br>
-This page calls a two Netlify Function(AWS LAMDA) and displays the results.<br>
-Here is a <a href="/.netlify/functions/nodes">direct link to the function</a> which returns the result of an HTTPS Request(method:POST,body:<a href="payload.json">ShopAdminPayload</a>) to a SFSQL endpoint.<br><br>
-    
+This page calls a two Netlify Function(AWS LAMDA) and prepares the data for use by the <a href="https://js.cytoscape.org/">Cytoscape.js</a> Graph theory network library.
+<br>
+Here is a direct link to the <a href="/.netlify/functions/nodes">NODES</a> and  <a href="/.netlify/functions/edges">Edges</a> function. Had to break it down to two functions because the browser and the edge function where complaining. Not shown in the demo are the <a href="nodemodify.json">Node</a> and <a href="edgemodify.json">Edge</a> modify commands that where first run before the most connected query can be run
 		</main>
 	</div>
 </section>
