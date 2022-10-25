@@ -83,10 +83,6 @@ document.write('<tr><td colspan="' + custs.length + '"><b>Customers</b></td></tr
 document.write("<tr>"); 
 for (var j = 0; j < custs.length; j++){
        document.write("<td>");	 
-	 //Object.entries(custs[j]).forEach(entry => {
-		 // const [key, value] = entry;
-		 // document.write(key + ": " +  value + "<br>");  
-		//});
 		document.write("First Name : " + custs[j]['fname'] + "<br>"); 
 		document.write("Last Name: " + custs[j]['lname'] + "<br>"); 
 		document.write("ID: " + custs[j]['cusid'] + "<br>");
