@@ -1,14 +1,6 @@
 const fetch = require("node-fetch");
-const API_ENDPOINT = process.env.endpoint;
-
+const API_ENDPOINT = process.env.demo_endpoint;
 exports.handler = async (event, context) => {
-function randomString(length, chars) {
-    var result = '';
-    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-    return result;
-}
-
-//const root = 'ntshop' + randomString(12, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');	
 const root = 'shop';
 const sfsqlReqPayload=`[
 	{
@@ -40,7 +32,7 @@ const sfsqlReqPayload=`[
   return fetch(API_ENDPOINT, {
 	  headers: {
 		   "content-type": "application/json",
-         "x-sfsql-apikey": process.env.api_key
+         "x-sfsql-apikey": process.env.demo_api_key
 		  }, 
 		  method: "POST",
         body: sfsqlReqPayload,
