@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const API_ENDPOINT = process.env.endpoint;
+const API_ENDPOINT = process.env.demo_endpoint;
 
 exports.handler = async (event, context) => {
 //console.log(`{\ncontext: ${JSON.stringify(context,null,2)},\nevent: ${JSON.stringify(event,null,2)}\n}`);
@@ -14,7 +14,7 @@ const ip = ipa.replace(/\./g, '').replace(/\:/g, '');
 				return fetch(API_ENDPOINT, {
 					  headers: {
 							"content-type": "application/json",
-							"x-sfsql-apikey": process.env.api_key
+							"x-sfsql-apikey": process.env.demo_api_key
 						  }, 
 						  method: "POST",
 						  body: QData,
@@ -35,7 +35,7 @@ const ip = ipa.replace(/\./g, '').replace(/\:/g, '');
 			return fetch(API_ENDPOINT, {
 					  headers: {
 							"content-type": "application/json",
-							"x-sfsql-apikey": process.env.api_key
+							"x-sfsql-apikey": process.env.demo_api_key
 						  }, 
 						  method: "POST",
 						  body: putData,
