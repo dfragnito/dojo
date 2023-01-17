@@ -64,7 +64,7 @@ const gqlquery = `query {
          "Authorization": process.env.api_key
 		  }, 
 		  method: "POST",
-        body: JSON.stringify({query:'gqlquery'}),
+        body: JSON.stringify({query:gqlquery}),
 	  })
     .then((response) => response.json())
     .then((data) => ({
