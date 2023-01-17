@@ -18,7 +18,7 @@ th, td {
 <div id="examplewrap"></div>
   <script>
     var results = \`${GQLResult}\`
-    var obj = JSON.parse(obj);
+    var obj = JSON.parse(results);
     console.log(result)
   </script>
  </body>
