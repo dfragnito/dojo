@@ -19,7 +19,7 @@ th, td {
   <script>
     var results = \`${GQLResult}\`
     var obj = JSON.parse(results);
-    console.log(result)
+    console.log(obj);
   </script>
  </body>
 	 </html>`;
