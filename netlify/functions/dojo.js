@@ -69,7 +69,7 @@ const gqlquery = `query {
     .then((response) => response.json())
     .then((data) => ({
       statusCode: 200,
-      body: html(JSON.stringify(data)),
+      body: html(JSON.stringify(data)), 
     }))
     .catch((error) => ({ statusCode: 422, body: String(error) }));
 };
