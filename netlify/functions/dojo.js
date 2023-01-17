@@ -41,7 +41,7 @@ const gqlquery = `query {
       slug
       standings(query: {
       page: 1,
-      perPage: 100
+      perPage: 300
       })
       {
       nodes {
