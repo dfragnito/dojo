@@ -15,4 +15,12 @@
   "devDependencies": {
     "@netlify/plugin-nextjs": "^4.30.0"
   }
+}.
+{
+  "name": "typescript",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "tabulator-tables": "5.4.3"
+  }
 }
